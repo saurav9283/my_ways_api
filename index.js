@@ -11,15 +11,14 @@ const chatRoute = require("./route/chatRoute.js");
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(cors({ origin: 'https://my-ways-frontend.vercel.app' }));
+app.use(cors({ origin: '*' }));
 dotenv.config();
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: {
-    origin: "https://my-ways-frontend.vercel.app",
-    methods: ["GET", "POST"],
-  },
-});
+    cors: {
+      origin: '*',
+    },
+  });
 
 // Socket.io
 io.on("connection", (socket) => {
