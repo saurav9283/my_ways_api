@@ -19,7 +19,7 @@ module.exports.register = async (req, res) => {
     delete user.password;
     return res.json({ status: true, user });
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 };
 
@@ -35,6 +35,6 @@ module.exports.login = async (req, res) => {
     delete user.password;
     return res.json({ status: true, user });
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 };
