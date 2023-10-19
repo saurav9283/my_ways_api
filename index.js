@@ -12,19 +12,18 @@ app.use(cors());
 dotenv.config();
 app.use(express.json());
 
-const connect = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("Connected to MongoDB!");
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-  }
-};
-
-connect();
+// const connect = async () => {
+//   try {
+//     await mongoose.connect(process.env.MONGO, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     });
+//     console.log("Connected to MongoDB!");
+//   } catch (error) {
+//     console.error("Error connecting to MongoDB:", error);
+//   }
+// };
+// connect();
 
 app.get("/", (req, res) => {
   res.send("API working");
