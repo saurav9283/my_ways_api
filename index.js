@@ -15,7 +15,7 @@ dotenv.config();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://my-ways-frontend.vercel.app/",
+    origin: "https://my-ways-frontend.vercel.app",
     methods: ["GET", "POST"],
   },
 });
