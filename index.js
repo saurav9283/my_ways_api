@@ -9,11 +9,6 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send("API working");
-});
-app.use("/api/auth" , userRoutes)
-
 mongoose.connect(process.env.MONGO,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -22,6 +17,13 @@ mongoose.connect(process.env.MONGO,{
 }).catch((error)=>{
     console.log(error.message);
 });
+
+app.get('/', (req, res) => {
+    res.send("API working");
+});
+app.use("/api/auth" , userRoutes)
+
+
 
 app.listen(process.env.PORT , ()=>{
     console.log(`Server started on port ${process.env.PORT}`);
