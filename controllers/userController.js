@@ -1,7 +1,7 @@
 const User = require("../models/userModel.js");
 const bcrypt = require("bcrypt");
 
-module.exports.register = async (req, res, next) => {
+module.exports.register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const usernameCheck = await User.findOne({ username });
@@ -18,12 +18,12 @@ module.exports.register = async (req, res, next) => {
     });
     delete user.password;
     return res.json({ status: true, user });
-  } catch (ex) {
-    next(ex);
+  } catch (err) {
+    console.log(err)
   }
 };
 
-module.exports.login = async (req, res, next) => {
+module.exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
@@ -34,7 +34,7 @@ module.exports.login = async (req, res, next) => {
       return res.json({ msg: "Incorrect Username or Password", status: false });
     delete user.password;
     return res.json({ status: true, user });
-  } catch (ex) {
-    next(ex);
+  } catch (err) {
+    console.log(err)
   }
 };
