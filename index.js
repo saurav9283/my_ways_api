@@ -11,6 +11,7 @@ const chatRoute = require("./route/chatRoute.js");
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(cors({ origin: 'https://my-ways-frontend.vercel.app' }));
 dotenv.config();
 const server = http.createServer(app);
 const io = new Server(server, {
