@@ -1,4 +1,5 @@
 const express = require("express");
+const dotenv = require("dotenv");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const userRoutes = require("../backend/route/userRoute.js");
@@ -7,6 +8,7 @@ const app = express();
 require("dotenv").config();
 
 app.use(cors());
+dotenv.config();
 app.use(express.json());
 
 const connect = async () => {

@@ -2,11 +2,9 @@ const MessageModel = require("../models/chatModel.js");
 
 module.exports.addMessage = async (req, res) => {
   try {
-    const { from, to, message } = req.body;
+    const { from } = req.body;
     const data = await MessageModel.create({
       message: { text: message },
-      users: [from, to],
-      sender: from,
     });
 
     if (data) {
