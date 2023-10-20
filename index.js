@@ -1,7 +1,6 @@
 const http = require("http");
 const express = require("express");
 const dotenv = require("dotenv");
-const path = require("path");
 const cors = require("cors");
 const { Server } = require("socket.io");
 const mongoose = require("mongoose");
@@ -9,18 +8,24 @@ const userRoutes = require("./route/userRoute.js");
 const chatRoute = require("./route/chatRoute.js");
 
 const app = express();
-app.use(express.json());
-app.use(cors());
-app.use(cors({ origin: '*' }));
 dotenv.config();
+
+app.use(express.json());
+app.use(cors({
+  origin: 'my-ways-frontend.vercel.app', 
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+}));
+
 const server = http.createServer(app);
 const io = new Server(server, {
-    cors: {
-      origin: '*',
-    },
-  });
+  cors: {
+    origin: 'my-ways-frontend.vercel.app',
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
 
-// Socket.io
 io.on("connection", (socket) => {
   socket.on("user-message", (message) => {
     io.emit("message", message);
@@ -47,4 +52,5 @@ app.get("/", (req, res) => {
 app.use("/api/auth", userRoutes);
 app.use("/api/message", chatRoute);
 
-server.listen(8080, () => console.log(`Server Started at PORT:8080`));
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => console.log(`Server Started at PORT: ${PORT}`));
